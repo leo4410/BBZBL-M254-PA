@@ -33,6 +33,8 @@ jobs:
     env:
       TOPLEVEL: ghcr.io
       IMAGE: dockerfile
+      
+    needs: build
 
     steps: 
       - name: Download math result for job 1
