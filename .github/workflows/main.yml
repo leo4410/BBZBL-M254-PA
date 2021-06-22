@@ -45,9 +45,6 @@ jobs:
       - name: Build repository path
         run: echo "REPOSITORY=${{ env.TOPLEVEL }}/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/${{ env.IMAGE }}" >> $GITHUB_ENV
 
-      - name: Check out the repository
-        uses: actions/checkout@v2
-
       - name: Login to the GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.TOPLEVEL }} -u ${{ github.actor }} --password-stdin
 
