@@ -41,9 +41,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: target
-          
-      - name: Test
-        run: ls target
     
       - name: Build repository path
         run: echo "REPOSITORY=${{ env.TOPLEVEL }}/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/${{ env.IMAGE }}" >> $GITHUB_ENV
@@ -53,6 +50,9 @@ jobs:
 
       - name: Login to the GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.TOPLEVEL }} -u ${{ github.actor }} --password-stdin
+
+      - name: Test
+        run: ls target
 
       - name: Build the Docker image
         run: |
