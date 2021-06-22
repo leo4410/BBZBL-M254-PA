@@ -24,7 +24,7 @@ jobs:
       - name: Stage Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: artifacts/target
+          name: target
           path: target/
 
   deploy:
@@ -38,7 +38,7 @@ jobs:
       - name: Download math result for job 1
         uses: actions/download-artifact@v2
         with:
-          name: artifacts
+          name: target
           
       - name: Test
         run: ls target/
