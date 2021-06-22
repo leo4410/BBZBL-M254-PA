@@ -35,6 +35,12 @@ jobs:
       IMAGE: dockerfile
 
     steps:
+      - name: my-artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: Package
+          path: target/
+    
       - name: Build repository path
         run: echo "REPOSITORY=${{ env.TOPLEVEL }}/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/${{ env.IMAGE }}" >> $GITHUB_ENV
 
