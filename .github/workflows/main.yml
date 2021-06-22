@@ -43,7 +43,7 @@ jobs:
           name: target
           
       - name: Test
-        run: ls target/
+        run: ls
     
       - name: Build repository path
         run: echo "REPOSITORY=${{ env.TOPLEVEL }}/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/${{ env.IMAGE }}" >> $GITHUB_ENV
