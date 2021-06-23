@@ -59,3 +59,8 @@ jobs:
         run: |
           docker push ${{ env.REPOSITORY }}:${{ github.sha }} 
           docker push ${{ env.REPOSITORY }}:latest
+          
+      - name: Remove artifacts
+        uses: actions/remove-artifact@v2
+        with:
+          name: target
