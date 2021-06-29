@@ -24,7 +24,7 @@ jobs:
       - name: Stage Artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: target
+          name: artifacts
           path: .
 
   deploy:
@@ -40,16 +40,13 @@ jobs:
       - name: Download math result for job 1
         uses: actions/download-artifact@v2
         with:
-          name: target
+          name: artifacts
     
       - name: Build repository path
         run: echo "REPOSITORY=${{ env.TOPLEVEL }}/$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')/${{ env.IMAGE }}" >> $GITHUB_ENV
 
       - name: Login to the GitHub Container Registry
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ${{ env.TOPLEVEL }} -u ${{ github.actor }} --password-stdin
-
-      - name: Test
-        run: ls target
 
       - name: Build the Docker image
         run: |
@@ -59,8 +56,3 @@ jobs:
         run: |
           docker push ${{ env.REPOSITORY }}:${{ github.sha }} 
           docker push ${{ env.REPOSITORY }}:latest
-          
-      - name: Remove artifacts
-        uses: actions/remove-artifact@v2
-        with:
-          name: target
